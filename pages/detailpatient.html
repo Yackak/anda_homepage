@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Task Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #calendar {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .calendar-day {
+            width: calc(100% / 7);
+            height: 50px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .calendar-day.complete {
+            background-color: #4caf50;
+        }
+
+        .calendar-day.incomplete {
+            background-color: #f44336;
+        }
+
+        #chart {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            position: relative;
+        }
+
+        #chart canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #chart .percentage {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Daily Task Tracker</h1>
+    <div id="calendar"></div>
+    <div id="chart">
+        <canvas id="chart-canvas" width="200" height="200"></canvas>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script>
+        // 일일 작업을 배열로 정의합니다.
+        const dailyTasks = [
+            {
+                date: "2023-04-15",
+                complete: false
+            },
+            {
+                date: "2023-04-16",
+                complete: true
+            },
+            {
+                date: "2023-04-17",
+                complete: true
+            },
+            {
+                date: "2023-04-18",
+                complete: true
+            },
+            {
+                date: "2023-04-19",
+                complete: true
+            },
+            {
+                date: "2023-04-20",
+                complete: true
+            },
+            {
+                date: "2023-04-21",
+                complete: true
+            },
+            {
+                date: "2023-04-22",
+                complete: true
+            },
+            {
+                date: "2023-04-23",
+                complete: true
+            },
+            {
+                date: "2023-04-24",
+                complete: true
+            },
+            {
+                date: "2023-04-25",
+                complete: true
+            },
+            {
+                date: "2023-04-26",
+                complete: true
+            },
+            {
+                date: "2023-04-27",
+                complete: false
+            }
+        ];
+
+        // 달력을 렌더링합니다.
+        const calendar = document.getElementById("calendar");
+        const startDate = moment("2023-04-15");
+        const endDate = moment("2023-04-30");
+        let currentDate = startDate.clone();
+        while (currentDate.isSameOrBefore(endDate, "day")) {
+            const calendarDay = document.createElement("div");
+            calendarDay.classList.add("calendar-day");
+            if (currentDate.isBefore(startDate, "day") || currentDate.isAfter(endDate, "day")) {
+                calendarDay.classList.add("disabled");
+            } else {
+                const task = dailyTasks.find((task) => task.date === currentDate.format("YYYY-MM-DD"));
+                if (task) {
+                    if (task.complete) {
+                        calendarDay.classList.add("complete");
+                    } else {
+                        calendarDay.classList.add("incomplete");
+                    }
+                }
+            }
+            calendarDay.textContent = currentDate.format("D");
+            calendar.appendChild(calendarDay);
+            currentDate.add(1, "day");
+        }
+
+        // 원형 그래프를 그립니다.
+        const totalTasks = dailyTasks.length;
+        const completedTasks = dailyTasks.filter((task) => task.complete).length;
+        const incompleteTasks = totalTasks - completedTasks;
+
+        const canvas = document.createElement("canvas");
+        canvas.width = 200;
+        canvas.height = 200;
+        canvas.style.display = "block";
+        canvas.style.margin = "20px auto";
+        calendar.after(canvas);
+
+        const ctx = canvas.getContext("2d");
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const radius = 80;
+        const startAngle = -0.5 * Math.PI;
+        const endAngle = (completedTasks / totalTasks) * 2 * Math.PI + startAngle;
+
+        // 완료된 작업을 나타내는 원형 그래프를 그립니다.
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+        ctx.lineTo(centerX, centerY);
+        ctx.fillStyle = "#4caf50";
+        ctx.fill();
+
+        // 미완료된 작업을 나타내는 원형 그래프를 그립니다.
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, endAngle, startAngle);
+        ctx.lineTo(centerX, centerY);
+        ctx.fillStyle = "#f44336";
+        ctx.fill();
+
+        // 원형 그래프의 가운데에 완료된 작업의 수와 전체 작업의 수를 나타내는 텍스트를 그립니다.
+        const text = `${completedTasks}/${totalTasks}`;
+        ctx.font = "bold 24px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = "#333";
+        ctx.fillText(text, centerX, centerY);
+        const percentage = Math.round((completedTasks / totalTasks) * 100);
+        ctx.font = "bold 16px sans-serif";
+        ctx.fillStyle = "#666";
+        ctx.fillText(`${percentage}%`, centerX, centerY + 30);
+
+    </script>
+</body>
+
+</html>

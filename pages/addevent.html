@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>안과 이벤트 정보</title>
+    <style>
+      /* CSS 스타일 지정 */
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      
+      form {
+        margin-bottom: 20px;
+      }
+      
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      
+      input[type="text"],
+      input[type="date"],
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+      
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+      
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      
+      th, td {
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+      }
+      
+      th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
+      
+      .success {
+        color: green;
+      }
+      
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>안과 이벤트 정보</title>
+        <style>
+          /* CSS 스타일 지정 */
+          body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+          }
+          
+          form {
+            margin-bottom: 20px;
+          }
+          
+          label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+          }
+          
+          input[type="text"],
+          input[type="date"],
+          select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-size: 16px;
+          }
+          
+          input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+          }
+          
+          input[type="submit"]:hover {
+            background-color: #3e8e41;
+          }
+          
+          table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+          }
+          
+          th, td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+          }
+          
+          th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+          }
+          
+          .success {
+            color: green;
+          }
+          
+          .error {
+            color: red;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>안과 이벤트 정보</h1>
+<!-- 이벤트 정보 입력 폼 -->
+<form id="event-form">
+    <label for="event-name">이벤트명:</label>
+    <input type="text" id="event-name" name="event-name" required>
+  
+    <label for="event-category">이벤트 카테고리:</label>
+    <select id="event-category" name="event-category" required>
+      <option value="">카테고리 선택</option>
+      <option value="라식">라식</option>
+      <option value="라섹">라섹</option>
+      <option value="스마일라식">스마일라식</option>
+      <option value="투데이라섹">투데이라섹</option>
+      <option value="렌즈삽입술">렌즈삽입술</option>
+    </select>
+  
+    <label for="event-period">이벤트 기간:</label>
+    <input type="date" id="event-period" name="event-period" required>
+  
+    <label for="event-price">이벤트 가격:</label>
+    <input type="text" id="event-price" name="event-price" required>
+  
+    <label for="clinic-name">안과명:</label>
+    <input type="text" id="clinic-name" name="clinic-name" required>
+  
+    <input type="submit" value="추가">
+  </form>
+</body>
+</html>  
